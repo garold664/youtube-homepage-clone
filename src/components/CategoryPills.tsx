@@ -24,20 +24,31 @@ export default function CategoryPills({
 
   useEffect(() => {
     if (containerRef.current == null) return;
-    const edge = containerRef.current.scrollWidth;
-    const width = containerRef.current.clientWidth;
-    // const newTranslate = translate + TRANSLATE_AMOUNT;
-    console.log(edge, width);
-    if (translate + width >= edge) {
-      setIsRightVisible(false);
-    } else {
-      setIsRightVisible(true);
-    }
-    if (translate <= 0) {
-      setIsLeftVisible(false);
-    } else {
-      setIsLeftVisible(true);
-    }
+    // const edge = containerRef.current.scrollWidth;
+    // const width = containerRef.current.clientWidth;
+    // // const newTranslate = translate + TRANSLATE_AMOUNT;
+    // console.log(edge, width);
+    // if (translate + width >= edge) {
+    //   setIsRightVisible(false);
+    // } else {
+    //   setIsRightVisible(true);
+    // }
+    // if (translate <= 0) {
+    //   setIsLeftVisible(false);
+    // } else {
+    //   setIsLeftVisible(true);
+    // }
+
+    const observer = new ResizeObserver((entries) => {
+      console.log(entries);
+      const container = entries[0]?.target;
+      if (!container) return;
+      setIsLeftVisible(translate > 0);
+      setIsRightVisible(
+        translate + container.clientWidth < container.scrollWidth
+      );
+    });
+    observer.observe(containerRef.current);
   }, [categories, translate]);
 
   return (
