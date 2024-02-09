@@ -92,7 +92,7 @@ export default function SideBar() {
           })}
         </LargeSidebarSection>
         <hr />
-        <LargeSidebarSection title="Explore" visibleItemCount={1}>
+        <LargeSidebarSection title="Explore">
           <LargeSidebarItem
             IconOrImgUrl={Flame}
             title="Trending"
