@@ -28,11 +28,10 @@ export function SidebarProvider({ children }: SidebarProviderProps) {
       if (!isScreenSmall()) setIsSmallOpen(false);
     };
 
+    window.addEventListener('resize', handler);
     return () => {
       window.removeEventListener('resize', handler);
     };
-
-    window.addEventListener('resize', handler);
   }, []);
 
   function isScreenSmall() {
